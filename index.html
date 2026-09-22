@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '29292518643681513');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=29292518643681513&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="logo.png.jpg">
+  <link rel="apple-touch-icon" href="logo.png.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oportunidade dōTERRA | Qualificação</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+
+    :root {
+      --primary:       #452174;
+      --primary-dark:  #321658;
+      --primary-light: #EDE6F5;
+      --primary-mid:   #5a2e8f;
+    }
+
+    /* ---- Telas ---- */
+    .step {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .step.active {
+      display: flex;
+      opacity: 1;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .step.active .step-content {
+      animation: slideUp 0.4s ease forwards;
+    }
+
+    /* ---- Botão primário ---- */
+    .btn-primary {
+      background-color: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(109,40,217,0.30);
+    }
+    .btn-primary:hover  { background-color: var(--primary-dark); box-shadow: 0 6px 28px rgba(109,40,217,0.38); }
+    .btn-primary:active { transform: scale(0.97); }
+
+    /* ---- Input focus ---- */
+    .input-primary:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(109,40,217,0.18);
+    }
+
+    /* ---- Barra de progresso ---- */
+    #progress-bar { background-color: var(--primary); transition: width 0.5s cubic-bezier(.4,0,.2,1); }
+
+    /* ---- Pulse no ícone final ---- */
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(109,40,217,0.45); }
+      70%  { box-shadow: 0 0 0 14px rgba(109,40,217,0); }
+      100% { box-shadow: 0 0 0 0 rgba(109,40,217,0); }
+    }
+    .pulse { animation: pulse-ring 2s infinite; }
+
+    /* ---- Card do formulário ---- */
+    .form-card {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    /* ---- Tag pill ---- */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(109,40,217,0.20);
+    }
+
+    /* ---- Step indicator dots ---- */
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #E2E8F0;
+      transition: all 0.3s;
+    }
+    .dot.active { background: var(--primary); width: 24px; border-radius: 4px; }
+
+    /* ---- Choice cards ---- */
+    .choice-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 2px solid #E2E8F0;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #FAFAFA;
+      text-align: left;
+      width: 100%;
+      user-select: none;
+    }
+    .choice-card:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .choice-card.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    /* Indicador radio (única escolha) */
+    .choice-indicator {
+      width: 20px; height: 20px;
+      border: 2px solid #CBD5E0;
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .choice-card.selected .choice-indicator {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    .choice-card.selected .choice-indicator::after {
+      content: '';
+      display: block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: white;
+    }
+  </style>
+</head>
+
+<body style="background:#F5F4EF;" class="min-h-screen flex flex-col">
+
+  <!-- BARRA DE PROGRESSO -->
+  <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
+    <div id="progress-bar" class="h-1 w-0 rounded-r-full"></div>
+  </div>
+
+  <main class="flex-1 flex items-center justify-center px-4 pt-10 pb-6">
+    <div class="w-full max-w-sm">
+
+      <!-- =====================================================
+           TELA 1 — BOAS-VINDAS
+      ===================================================== -->
+      <section id="step-1" class="step active flex-col gap-4">
+        <div class="step-content w-full flex flex-col gap-4">
+
+          <!-- Logo / marca -->
+          <div class="flex justify-center">
+            <div class="text-center">
+              <p class="text-[28px] font-black tracking-tight" style="color:var(--primary);">dōTERRA</p>
+              <p class="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Oportunidade de Negócio</p>
+            </div>
+          </div>
+
+          <!-- Pill -->
+          <div class="flex justify-center">
+            <span class="pill">Empreendedorismo & Bem-estar</span>
+          </div>
+
+          <!-- Título -->
+          <div class="text-center space-y-3">
+            <h1 class="text-[21px] font-black text-gray-900 leading-tight">
+              Você gostaria de construir uma <span style="color:var(--primary)">nova fonte de renda</span> através do mercado de bem-estar?
+            </h1>
+            <p class="text-[13px] text-gray-400 leading-snug">
+              Responda algumas perguntas rápidas para entender se essa oportunidade combina com você.
+            </p>
+            <p class="text-[13px] font-semibold px-3 py-2 rounded-xl inline-block" style="background:var(--primary-light); color:var(--primary);">
+              Leva menos de 2 minutos
+            </p>
+          </div>
+
+          <button onclick="goToStep(2)" class="btn-primary w-full rounded-2xl py-4 text-[15px]">
+            Quero descobrir →
+          </button>
+
+          <p class="text-center text-[11px] text-gray-400">Dados protegidos. Sem spam.</p>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           TELA 2 — NOME
+      ===================================================== -->
+      <section id="step-2" class="step flex-col gap-5">
+        <div class="step-content w-full flex flex-col gap-5">
+
+          <div class="flex items-center gap-2">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+
+          <div class="form-card p-6 space-y-5">
+            <div class="space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-widest" style="color:var(--primary);">Pergunta 1</p>
+              <h2 class="text-[22px] font-black text-gray-900 leading-tight">Qual é o seu nome?</h2>
+              <p class="text-gray-400 text-[13px]">Como prefere ser chamada?</p>
+            </div>
+
+            <div class="space-y-1">
+              <input
+                id="input-nome"
+                type="text"
+                inputmode="text"
+                autocomplete="given-name"
+                placeholder="Ex: Maria, João, Ana..."
+                class="input-primary w-full border-2 border-gray-200 rounded-xl px-4 py-4 text-[15px] bg-gray-50 text-gray-800 placeholder-gray-300 transition-all"
+                onkeydown="if(event.key==='Enter') avancarNome()"
+              />
+              <p id="erro-nome" class="text-red-400 text-[12px] hidden pl-1">Por favor, digite seu nome.</p>
+            </div>
+
+            <button onclick="avancarNome()" class="btn-primary w-full rounded-xl py-4 text-[15px]">
+              Continuar →
+            </button>
+          </div>
+
+          <button onclick="goToStep(1)" class="text-[13px] text-gray-400 hover:text-gray-600 text-center w-full transition-colors">
+            ← Voltar
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           TELA 3 — WHATSAPP
+      ===================================================== -->
+      <section id="step-3" class="step flex-col gap-5">
+        <div class="step-content w-full flex flex-col gap-5">
+
+          <div class="flex items-center gap-2">
+            <div class="dot"></div>
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+
+          <div class="form-card p-6 space-y-5">
+            <div class="space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-widest" style="color:var(--primary);">Pergunta 2</p>
+              <h2 id="titulo-whatsapp" class="text-[22px] font-black text-gray-900 leading-tight">
+                Qual é o seu WhatsApp?
+              </h2>
+            </div>
+
+            <div class="space-y-1">
+              <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2" style="color:var(--primary);">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
+                    <path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.771.463 3.485 1.344 4.985L2 22l5.158-1.32A10.004 10.004 0 0012.004 22C17.53 22 22 17.523 22 11.996 22 6.477 17.53 2 12.004 2zm0 18.297a8.29 8.29 0 01-4.243-1.163l-.304-.182-3.06.784.81-2.982-.198-.314A8.297 8.297 0 1112.004 20.3z"/>
+                  </svg>
+                </span>
+                <input
+                  id="input-whatsapp"
+                  type="tel"
+                  inputmode="numeric"
+                  placeholder="(11) 9 0000-0000"
+                  maxlength="16"
+                  class="input-primary w-full border-2 border-gray-200 rounded-xl pl-12 pr-4 py-4 text-[15px] bg-gray-50 text-gray-800 placeholder-gray-300 transition-all"
+                  oninput="mascaraTelefone(this)"
+                  onkeydown="if(event.key==='Enter') avancarWhatsapp()"
+                />
+              </div>
+              <p id="erro-whatsapp" class="text-red-400 text-[12px] hidden pl-1">Digite um WhatsApp válido com DDD.</p>
+            </div>
+
+            <div class="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 border border-gray-100">
+              <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style="background:var(--primary-light);">
+                <svg class="w-4 h-4" style="color:var(--primary);" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <p class="text-[12px] text-gray-500">Seus dados são <strong class="text-gray-700">100% seguros</strong> e não serão compartilhados.</p>
+            </div>
+
+            <button onclick="avancarWhatsapp()" class="btn-primary w-full rounded-xl py-4 text-[15px]">
+              Continuar →
+            </button>
+          </div>
+
+          <button onclick="goToStep(2)" class="text-[13px] text-gray-400 hover:text-gray-600 text-center w-full transition-colors">
+            ← Voltar
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           TELA 4 — O QUE VOCÊ BUSCA? (MÚLTIPLA ESCOLHA)
+      ===================================================== -->
+      <section id="step-4" class="step flex-col gap-5">
+        <div class="step-content w-full flex flex-col gap-5">
+
+          <div class="flex items-center gap-2">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+
+          <div class="form-card p-6 space-y-4">
+            <div class="space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-widest" style="color:var(--primary);">Pergunta 3</p>
+              <h2 class="text-[20px] font-black text-gray-900 leading-tight">O que você busca hoje?</h2>
+            </div>
+
+            <div class="space-y-2">
+              <button class="choice-card" onclick="selecionarBusca(this, 'Renda extra')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Renda extra</span>
+              </button>
+              <button class="choice-card" onclick="selecionarBusca(this, 'Construir uma renda principal')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Construir uma renda principal</span>
+              </button>
+              <button class="choice-card" onclick="selecionarBusca(this, 'Empreender e ter algo próprio')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Empreender e ter algo próprio</span>
+              </button>
+            </div>
+          </div>
+
+          <button onclick="goToStep(3)" class="text-[13px] text-gray-400 hover:text-gray-600 text-center w-full transition-colors">
+            ← Voltar
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           TELA 5 — JÁ TRABALHOU COM VENDAS?
+      ===================================================== -->
+      <section id="step-5" class="step flex-col gap-5">
+        <div class="step-content w-full flex flex-col gap-5">
+
+          <div class="flex items-center gap-2">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+
+          <div class="form-card p-6 space-y-4">
+            <div class="space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-widest" style="color:var(--primary);">Pergunta 4</p>
+              <h2 class="text-[20px] font-black text-gray-900 leading-tight">Você já trabalhou com <span style="color:var(--primary)">vendas</span> antes?</h2>
+            </div>
+
+            <div class="space-y-2">
+              <button class="choice-card" onclick="selecionarVendas(this, 'Sim')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Sim</span>
+              </button>
+              <button class="choice-card" onclick="selecionarVendas(this, 'Não')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Não</span>
+              </button>
+            </div>
+          </div>
+
+          <button onclick="goToStep(4)" class="text-[13px] text-gray-400 hover:text-gray-600 text-center w-full transition-colors">
+            ← Voltar
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           TELA 6 — QUANTO TEMPO DEDICAR?
+      ===================================================== -->
+      <section id="step-6" class="step flex-col gap-5">
+        <div class="step-content w-full flex flex-col gap-5">
+
+          <div class="flex items-center gap-2">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+
+          <div class="form-card p-6 space-y-4">
+            <div class="space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-widest" style="color:var(--primary);">Pergunta 5</p>
+              <h2 class="text-[20px] font-black text-gray-900 leading-tight">Quanto tempo você consegue dedicar para desenvolver um <span style="color:var(--primary)">negócio</span>?</h2>
+            </div>
+
+            <div class="space-y-2">
+              <button class="choice-card" onclick="selecionarTempo(this, 'Algumas horas por semana')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Algumas horas por semana</span>
+              </button>
+              <button class="choice-card" onclick="selecionarTempo(this, 'Meio período')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Meio período</span>
+              </button>
+              <button class="choice-card" onclick="selecionarTempo(this, 'Período integral')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Período integral</span>
+              </button>
+            </div>
+          </div>
+
+          <button onclick="goToStep(5)" class="text-[13px] text-gray-400 hover:text-gray-600 text-center w-full transition-colors">
+            ← Voltar
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           TELA 7 — META DE RENDA
+      ===================================================== -->
+      <section id="step-7" class="step flex-col gap-5">
+        <div class="step-content w-full flex flex-col gap-5">
+
+          <div class="flex items-center gap-2">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+
+          <div class="form-card p-6 space-y-4">
+            <div class="space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-widest" style="color:var(--primary);">Pergunta 6</p>
+              <h2 class="text-[20px] font-black text-gray-900 leading-tight">Qual <span style="color:var(--primary)">meta de renda</span> mais chama sua atenção?</h2>
+            </div>
+
+            <div class="space-y-2">
+              <button class="choice-card" onclick="selecionarMeta(this, 'Entre R$500 e R$2.000 por mês')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Entre R$500 e R$2.000 por mês</span>
+              </button>
+              <button class="choice-card" onclick="selecionarMeta(this, 'Entre R$2.000 e R$5.000 por mês')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Entre R$2.000 e R$5.000 por mês</span>
+              </button>
+              <button class="choice-card" onclick="selecionarMeta(this, 'Entre R$5.000 e R$10.000 por mês')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Entre R$5.000 e R$10.000 por mês</span>
+              </button>
+              <button class="choice-card" onclick="selecionarMeta(this, 'Acima de R$10.000 por mês')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Acima de R$10.000 por mês</span>
+              </button>
+            </div>
+          </div>
+
+          <button onclick="goToStep(6)" class="text-[13px] text-gray-400 hover:text-gray-600 text-center w-full transition-colors">
+            ← Voltar
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           TELA 8 — DISPONIBILIDADE PARA INVESTIR
+      ===================================================== -->
+      <section id="step-8" class="step flex-col gap-5">
+        <div class="step-content w-full flex flex-col gap-5">
+
+          <div class="flex items-center gap-2">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot active"></div>
+            <div class="dot"></div>
+          </div>
+
+          <div class="form-card p-6 space-y-4">
+            <div class="space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-widest" style="color:var(--primary);">Pergunta 7</p>
+              <h2 class="text-[20px] font-black text-gray-900 leading-tight">Quanto você estaria disposta a <span style="color:var(--primary)">investir</span> no seu próprio negócio?</h2>
+            </div>
+
+            <div class="space-y-2">
+              <button class="choice-card" onclick="selecionarInvestimento(this, 'Entre R$100 e R$500')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Entre R$100 e R$500</span>
+              </button>
+              <button class="choice-card" onclick="selecionarInvestimento(this, 'Entre R$500 e R$1.000')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Entre R$500 e R$1.000</span>
+              </button>
+              <button class="choice-card" onclick="selecionarInvestimento(this, 'Entre R$1.000 e R$2.000')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Entre R$1.000 e R$2.000</span>
+              </button>
+              <button class="choice-card" onclick="selecionarInvestimento(this, 'Não tenho disponibilidade para investir neste momento')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">⏳ Não tenho disponibilidade para investir neste momento</span>
+              </button>
+            </div>
+          </div>
+
+          <button onclick="goToStep(7)" class="text-[13px] text-gray-400 hover:text-gray-600 text-center w-full transition-colors">
+            ← Voltar
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           TELA CADASTRO — JÁ POSSUI CADASTRO NA DOTERRA?
+      ===================================================== -->
+      <section id="step-cadastro" class="step flex-col gap-5">
+        <div class="step-content w-full flex flex-col gap-5">
+
+          <div class="flex items-center gap-2">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot active"></div>
+          </div>
+
+          <div class="form-card p-6 space-y-4">
+            <div class="space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-widest" style="color:var(--primary);">Última pergunta</p>
+              <h2 class="text-[20px] font-black text-gray-900 leading-tight">Você já possui cadastro ativo na dōTERRA?</h2>
+              <p class="text-gray-400 text-[13px]">Isso nos ajuda a direcionar o melhor atendimento para você.</p>
+            </div>
+
+            <div class="space-y-2">
+              <button class="choice-card" onclick="selecionarCadastro(this, 'nao')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Não</span>
+              </button>
+              <button class="choice-card" onclick="selecionarCadastro(this, 'sim')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Sim</span>
+              </button>
+            </div>
+          </div>
+
+          <button onclick="goToStep(8)" class="text-[13px] text-gray-400 hover:text-gray-600 text-center w-full transition-colors">
+            ← Voltar
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           TELA JÁ CADASTRADA — ENCERRAMENTO
+      ===================================================== -->
+      <section id="step-ja-cadastrada" class="step flex-col gap-5">
+        <div class="step-content w-full flex flex-col gap-5">
+
+          <div class="text-center space-y-3 pt-4">
+            <div class="flex justify-center">
+              <div class="w-20 h-20 rounded-full flex items-center justify-center" style="background:var(--primary-light); border: 2px solid rgba(69,33,116,0.2);">
+                <svg class="w-8 h-8" style="color:var(--primary);" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+            </div>
+            <h2 class="text-[24px] font-black text-gray-900 leading-tight">Que legal!</h2>
+            <p class="text-[14px] text-gray-400 leading-relaxed px-2">
+              Como você já possui um cadastro ativo com outra consultora, o ideal é continuar sua jornada com quem já te acompanha.
+            </p>
+          </div>
+
+          <button onclick="goToStep(1)" class="w-full rounded-2xl py-4 text-[15px] font-bold text-white transition-opacity hover:opacity-90" style="background:#111;">
+            ← Voltar ao início
+          </button>
+
+        </div>
+      </section>
+
+      <!-- =====================================================
+           TELA 9 — AGENDAR REUNIÃO
+      ===================================================== -->
+      <section id="step-9" class="step flex-col gap-5">
+        <div class="step-content w-full flex flex-col gap-5">
+
+          <div class="flex items-center gap-2">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot active"></div>
+          </div>
+
+          <div class="form-card p-6 space-y-4">
+            <div class="space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-widest" style="color:var(--primary);">Mais uma coisa…</p>
+              <h2 class="text-[20px] font-black text-gray-900 leading-tight">Você gostaria de agendar uma reunião <span style="color:var(--primary)">100% gratuita</span> comigo?</h2>
+              <p class="text-gray-400 text-[13px] leading-relaxed">Para entender como funciona a oportunidade de negócio com a dōTERRA.</p>
+            </div>
+
+            <div class="space-y-2">
+              <button class="choice-card" onclick="selecionarAgendamento(this, 'Sim, gostaria')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Sim, gostaria</span>
+              </button>
+              <button class="choice-card" onclick="selecionarAgendamento(this, 'Não neste momento')">
+                <div class="choice-indicator"></div>
+                <span class="text-[14px] text-gray-700 font-medium">Não neste momento</span>
+              </button>
+            </div>
+          </div>
+
+          <button onclick="goToStep('cadastro')" class="text-[13px] text-gray-400 hover:text-gray-600 text-center w-full transition-colors">
+            ← Voltar
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           TELA SOBRE A LAVINIA
+      ===================================================== -->
+      <section id="step-sobre" class="step flex-col gap-5">
+        <div class="step-content w-full flex flex-col gap-5">
+
+          <div class="flex items-center gap-2">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot active"></div>
+          </div>
+
+          <div class="form-card p-6 space-y-5">
+            <div class="flex flex-col items-center gap-3 text-center">
+              <div style="width:96px; height:96px; border-radius:50%; overflow:hidden; box-shadow:0 4px 20px rgba(69,33,116,0.35); flex-shrink:0;">
+                <img src="fotoperfillavinia.png" alt="Lavinia Gabriella" style="width:100%; height:100%; object-fit:cover;">
+              </div>
+              <div>
+                <p class="text-[17px] font-black text-gray-900">Lavinia Gabriella</p>
+                <p class="text-[12px] text-gray-400 font-semibold mt-0.5">Consultora dōTERRA</p>
+              </div>
+            </div>
+
+            <p class="text-[14px] text-gray-600 leading-relaxed text-center">
+              Sou consultora dōTERRA e estou aqui pra te ajudar a descobrir como transformar bem-estar em uma nova fonte de renda, com todo o suporte que você precisar.
+            </p>
+
+            <button onclick="goToStep('final')" class="btn-primary w-full rounded-xl py-4 text-[15px]">
+              Entendi
+            </button>
+          </div>
+
+          <button onclick="goToStep(9)" class="text-[13px] text-gray-400 hover:text-gray-600 text-center w-full transition-colors">
+            ← Voltar
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           TELA SEM INVESTIMENTO — ENCERRAMENTO
+      ===================================================== -->
+      <section id="step-sem-investimento" class="step flex-col gap-5">
+        <div class="step-content w-full flex flex-col gap-5">
+
+          <div class="text-center space-y-3 pt-4">
+            <h2 class="text-[26px] font-black text-gray-900 leading-tight">
+              Não foi possível prosseguir no momento.
+            </h2>
+            <p class="text-[14px] text-gray-400 leading-relaxed px-2">
+              Identificamos critérios que impedem a aprovação do seu perfil.
+            </p>
+          </div>
+
+          <div class="rounded-2xl px-5 py-4 flex items-start gap-3" style="background:#FEF2F2; border: 1.5px solid #FECACA;">
+            <svg class="w-5 h-5 mt-0.5 shrink-0 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <path stroke-linecap="round" d="M12 8v4m0 4h.01"/>
+            </svg>
+            <p class="text-[14px] text-red-600 leading-relaxed">
+              No momento, é necessário um investimento inicial para iniciar o próprio negócio.
+            </p>
+          </div>
+
+          <button onclick="goToStep(1)" class="w-full rounded-2xl py-4 text-[15px] font-bold text-white transition-opacity hover:opacity-90" style="background:#111;">
+            ← Voltar ao início
+          </button>
+
+        </div>
+      </section>
+
+      <!-- =====================================================
+           TELA FINAL
+      ===================================================== -->
+      <section id="step-final" class="step flex-col gap-4">
+        <div class="step-content w-full flex flex-col gap-4">
+
+          <div class="flex flex-col items-center gap-3 text-center">
+            <div class="pulse w-20 h-20 rounded-full flex items-center justify-center" style="background:var(--primary);">
+              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <div class="space-y-2">
+              <h2 class="text-[24px] font-black text-gray-900 leading-tight">Perfeito!</h2>
+            </div>
+          </div>
+
+          <div class="form-card p-6 space-y-3 text-center">
+            <p class="text-[14px] text-gray-600 leading-relaxed">
+              Recebi suas respostas e em breve entrarei em contato pelo WhatsApp para que possamos agendar um encontro online com você e te apresentar mais detalhes da oportunidade.
+            </p>
+            <p id="texto-ate-breve" class="text-[15px] font-semibold" style="color:var(--primary);">Até breve!</p>
+          </div>
+
+          <div class="form-card p-5 text-center space-y-3">
+            <p class="text-[13px] text-gray-500 leading-relaxed">Quer um atendimento mais rápido? Basta clicar no botão abaixo para me chamar no WhatsApp</p>
+            <a href="https://wa.me/553496996432" target="_blank" onclick="cliqueWhatsapp = true; if (typeof fbq !== 'undefined') fbq('track', 'Contact');"
+               style="background:#25D366;"
+               class="flex items-center justify-center gap-2 w-full rounded-2xl py-4 text-white font-bold text-[15px] transition-opacity hover:opacity-90">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Chamar no WhatsApp
+            </a>
+          </div>
+
+          <p class="text-center text-[11px] text-gray-400">dōTERRA · Oportunidade de Negócio</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="text-center py-5 text-[11px] text-gray-400">
+    © 2026 dōTERRA · Bem-estar para todos
+  </footer>
+
+  <!-- =====================================================
+       SCRIPT
+  ===================================================== -->
+  <script>
+    // ----------------------------------------------------------------
+    // TODO: Substitua pela URL do seu Google Apps Script para salvar leads
+    // ----------------------------------------------------------------
+    const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbxxrmwfMh7mledMF9IFn1NCRZiBImAudRHMTVRi0rriApIE8HLYH5ItoJFgaTX9OrhjjQ/exec";
+    const SHEET_ID = "1HlUDBBjv0W1FJgj7BcgIPhAXqQcalTQLeknnF_WMtjM";
+    const PIXEL_ID = "29292518643681513";
+
+    // ----------------------------------------------------------------
+    // TODO: Substitua pelo número e pela apikey do CallMeBot da Lavinia Gabriella
+    // ----------------------------------------------------------------
+    const CALLMEBOT_PHONE  = "";
+    const CALLMEBOT_APIKEY = "SUA_APIKEY_AQUI";
+
+    // ----------------------------------------------------------------
+    // Parâmetro UTM — identifica de qual anúncio veio o lead
+    // ----------------------------------------------------------------
+    const urlParams  = new URLSearchParams(window.location.search);
+    const utmContent = urlParams.get("utm_content") || "";
+
+    // ----------------------------------------------------------------
+    // Sistema operacional do lead
+    // ----------------------------------------------------------------
+    function detectarSistemaOperacional() {
+      const ua = navigator.userAgent;
+      if (/android/i.test(ua)) return "Android";
+      if (/iphone|ipad|ipod/i.test(ua)) return "iOS";
+      if (/windows/i.test(ua)) return "Windows";
+      if (/macintosh|mac os x/i.test(ua)) return "Mac";
+      if (/linux/i.test(ua)) return "Linux";
+      return "Desconhecido";
+    }
+    const sistemaOperacional = detectarSistemaOperacional();
+
+    // ----------------------------------------------------------------
+    // Data/hora legível no horário de Brasília
+    // ----------------------------------------------------------------
+    function formatarDataHoraBrasilia() {
+      return new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+    }
+
+    // ----------------------------------------------------------------
+    // Rastreamento de sessão (aba "Sessões" da planilha)
+    // ----------------------------------------------------------------
+    const utmSourceSessao   = urlParams.get("utm_source")   || "";
+    const utmCampaignSessao = urlParams.get("utm_campaign") || "";
+
+    const sessaoInicio   = Date.now();
+    let cliqueWhatsapp   = false;
+    let cliquePagina     = false;
+    let sessaoEnviada    = false;
+
+    const primeiraVisita = !localStorage.getItem("doterra_ja_visitou");
+    localStorage.setItem("doterra_ja_visitou", "1");
+
+    document.addEventListener("click", () => { cliquePagina = true; }, { once: true });
+
+    function enviarSessao() {
+      if (sessaoEnviada) return;
+      sessaoEnviada = true;
+
+      salvarLeadParcial();
+
+      const tempoNaPagina = Math.round((Date.now() - sessaoInicio) / 1000);
+      const virouLead = !!(nomeUsuario && numeroWhatsapp);
+
+      const payload = {
+        sheetId:         SHEET_ID,
+        tipo:            "sessao",
+        data_hora:       formatarDataHoraBrasilia(),
+        campanha:        utmCampaignSessao,
+        tempo_pagina:    tempoNaPagina,
+        clicou_wa:       cliqueWhatsapp ? "Sim" : "Não",
+        clicou_pagina:   cliquePagina ? "Sim" : "Não",
+        virou_lead:      virouLead ? "Sim" : "Não",
+        dispositivo:     sistemaOperacional,
+        primeira_visita: primeiraVisita ? "Sim" : "Não",
+        anuncio:         utmContent,
+        utm_source:      utmSourceSessao,
+        utm_campaign:    utmCampaignSessao,
+      };
+
+      if (GOOGLE_SHEET_URL === "SUA_URL_AQUI") return;
+
+      const corpo = JSON.stringify(payload);
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(GOOGLE_SHEET_URL, new Blob([corpo], { type: "text/plain" }));
+      } else {
+        fetch(GOOGLE_SHEET_URL, {
+          method: "POST",
+          mode: "no-cors",
+          keepalive: true,
+          headers: { "Content-Type": "text/plain" },
+          body: corpo,
+        }).catch(() => {});
+      }
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") enviarSessao();
+    });
+    window.addEventListener("pagehide", enviarSessao);
+
+    // ----------------------------------------------------------------
+    // Estado global
+    // ----------------------------------------------------------------
+    let nomeUsuario          = "";
+    let numeroWhatsapp       = "";
+    let possuiCadastro       = "";
+    let buscaSelecionada     = "";
+    let trabalhouVendas      = "";
+    let tempoDedicacao       = "";
+    let metaRenda            = "";
+    let disponibilidade      = "";
+    let agendamentoResposta  = "";
+
+    const progressoPorTela = {
+      1: 0, 2: 12, 3: 24, 4: 36, 5: 48,
+      6: 60, 7: 72, 8: 83, "cadastro": 87, 9: 93, "sobre": 97,
+      "sem-investimento": 100, "ja-cadastrada": 100, "final": 100
+    };
+
+    // ----------------------------------------------------------------
+    // Eventos de pixel por etapa
+    // ----------------------------------------------------------------
+    function pixelEtapa(n) {
+      if (typeof fbq === 'undefined') return;
+      const mapa = {
+        2:          () => fbq('track', 'ViewContent'),
+        4:          () => fbq('trackCustom', 'Etapa_Busca'),
+        5:          () => fbq('trackCustom', 'Etapa_Vendas'),
+        6:          () => fbq('trackCustom', 'Etapa_Tempo'),
+        7:          () => fbq('trackCustom', 'Etapa_MetaRenda'),
+        8:          () => fbq('trackCustom', 'Etapa_Investimento'),
+        "cadastro": () => fbq('trackCustom', 'Etapa_Cadastro'),
+        9:          () => fbq('trackCustom', 'Etapa_Agendamento'),
+        "sobre":    () => fbq('trackCustom', 'Etapa_Sobre'),
+      };
+      if (mapa[n]) mapa[n]();
+    }
+
+    // ----------------------------------------------------------------
+    // Navegação com fade
+    // ----------------------------------------------------------------
+    function goToStep(numero) {
+      pixelEtapa(numero);
+      const atual   = document.querySelector(".step.active");
+      const proxima = document.getElementById("step-" + numero);
+      if (!proxima) return;
+
+      if (atual) {
+        atual.style.opacity = "0";
+        setTimeout(() => {
+          atual.classList.remove("active");
+          atual.style.opacity = "";
+          mostrarTela(proxima);
+        }, 200);
+      } else {
+        mostrarTela(proxima);
+      }
+
+      document.getElementById("progress-bar").style.width =
+        (progressoPorTela[numero] ?? 0) + "%";
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function mostrarTela(el) {
+      el.classList.add("active");
+      const input = el.querySelector("input");
+      if (input) setTimeout(() => input.focus(), 380);
+    }
+
+    // ----------------------------------------------------------------
+    // Tela 2 — Nome
+    // ----------------------------------------------------------------
+    function avancarNome() {
+      const campo = document.getElementById("input-nome");
+      const erro  = document.getElementById("erro-nome");
+      const valor = campo.value.trim();
+
+      if (!valor || valor.length < 2) {
+        campo.classList.add("border-red-400");
+        erro.classList.remove("hidden");
+        campo.focus();
+        return;
+      }
+
+      campo.classList.remove("border-red-400");
+      erro.classList.add("hidden");
+      nomeUsuario = valor;
+
+      document.getElementById("titulo-whatsapp").textContent =
+        `Qual é o seu WhatsApp, ${nomeUsuario.split(" ")[0]}?`;
+
+      goToStep(3);
+    }
+
+    // ----------------------------------------------------------------
+    // Tela 3 — WhatsApp
+    // ----------------------------------------------------------------
+    function avancarWhatsapp() {
+      const campo = document.getElementById("input-whatsapp");
+      const erro  = document.getElementById("erro-whatsapp");
+      const valor = campo.value.trim();
+
+      if (valor.replace(/\D/g, "").length < 11) {
+        campo.classList.add("border-red-400");
+        erro.classList.remove("hidden");
+        campo.focus();
+        return;
+      }
+
+      campo.classList.remove("border-red-400");
+      erro.classList.add("hidden");
+      numeroWhatsapp = valor;
+      goToStep(4);
+    }
+
+    // ----------------------------------------------------------------
+    // Tela 4 — O que busca (auto-avança)
+    // ----------------------------------------------------------------
+    function selecionarBusca(btn, resposta) {
+      const container = btn.closest(".space-y-2");
+      container.querySelectorAll(".choice-card").forEach(c => c.classList.remove("selected"));
+      btn.classList.add("selected");
+      buscaSelecionada = resposta;
+      setTimeout(() => goToStep(5), 350);
+    }
+
+    // ----------------------------------------------------------------
+    // Tela 5 — Trabalhou com vendas (auto-avança)
+    // ----------------------------------------------------------------
+    function selecionarVendas(btn, resposta) {
+      const container = btn.closest(".space-y-2");
+      container.querySelectorAll(".choice-card").forEach(c => c.classList.remove("selected"));
+      btn.classList.add("selected");
+      trabalhouVendas = resposta;
+      setTimeout(() => goToStep(6), 350);
+    }
+
+    // ----------------------------------------------------------------
+    // Tela 6 — Tempo de dedicação (auto-avança)
+    // ----------------------------------------------------------------
+    function selecionarTempo(btn, resposta) {
+      const container = btn.closest(".space-y-2");
+      container.querySelectorAll(".choice-card").forEach(c => c.classList.remove("selected"));
+      btn.classList.add("selected");
+      tempoDedicacao = resposta;
+      setTimeout(() => goToStep(7), 350);
+    }
+
+    // ----------------------------------------------------------------
+    // Tela 7 — Meta de renda (auto-avança)
+    // ----------------------------------------------------------------
+    function selecionarMeta(btn, resposta) {
+      const container = btn.closest(".space-y-2");
+      container.querySelectorAll(".choice-card").forEach(c => c.classList.remove("selected"));
+      btn.classList.add("selected");
+      metaRenda = resposta;
+      setTimeout(() => goToStep(8), 350);
+    }
+
+    // ----------------------------------------------------------------
+    // Tela 8 — Disponibilidade para investir (auto-avança)
+    // ----------------------------------------------------------------
+    function selecionarInvestimento(btn, resposta) {
+      const container = btn.closest(".space-y-2");
+      container.querySelectorAll(".choice-card").forEach(c => c.classList.remove("selected"));
+      btn.classList.add("selected");
+      disponibilidade = resposta;
+      setTimeout(() => {
+        if (resposta === "Não tenho disponibilidade para investir neste momento") {
+          goToStep("sem-investimento");
+        } else {
+          goToStep("cadastro");
+        }
+      }, 350);
+    }
+
+    // ----------------------------------------------------------------
+    // Tela cadastro — Já possui cadastro na dōTERRA? (com ramificação)
+    // ----------------------------------------------------------------
+    function selecionarCadastro(btn, resposta) {
+      const container = btn.closest(".space-y-2");
+      container.querySelectorAll(".choice-card").forEach(c => c.classList.remove("selected"));
+      btn.classList.add("selected");
+      possuiCadastro = resposta;
+      setTimeout(() => {
+        if (resposta === "sim") {
+          goToStep("ja-cadastrada");
+        } else {
+          goToStep(9);
+        }
+      }, 350);
+    }
+
+    // ----------------------------------------------------------------
+    // Tela 9 — Agendamento (auto-avança)
+    // ----------------------------------------------------------------
+    function selecionarAgendamento(btn, resposta) {
+      const container = btn.closest(".space-y-2");
+      container.querySelectorAll(".choice-card").forEach(c => c.classList.remove("selected"));
+      btn.classList.add("selected");
+      agendamentoResposta = resposta;
+      setTimeout(() => {
+        saveLead();
+        const primeiro = nomeUsuario.split(" ")[0];
+        document.getElementById("texto-ate-breve").textContent = `Até breve, ${primeiro}!`;
+        goToStep("sobre");
+      }, 350);
+    }
+
+    // ----------------------------------------------------------------
+    // Máscara de telefone
+    // ----------------------------------------------------------------
+    function mascaraTelefone(input) {
+      let v = input.value.replace(/\D/g, "").substring(0, 11);
+      let r = "";
+      if (v.length >= 1) r = "(" + v.substring(0, 2);
+      if (v.length >= 3) r += ") " + v.substring(2, 7);
+      if (v.length >= 8) r += "-" + v.substring(7, 11);
+      input.value = r;
+    }
+
+    // ----------------------------------------------------------------
+    // Monta o payload de lead (completo ou parcial)
+    // ----------------------------------------------------------------
+    function construirPayloadLead(status) {
+      return {
+        sheetId:        SHEET_ID,
+        pixel_id:       PIXEL_ID,
+        nome:           nomeUsuario,
+        whatsapp:       numeroWhatsapp,
+        link_whatsapp:  "https://wa.me/55" + numeroWhatsapp.replace(/\D/g, ""),
+        possui_cadastro: possuiCadastro,
+        busca:          buscaSelecionada,
+        vendas:         trabalhouVendas,
+        tempo:          tempoDedicacao,
+        meta_renda:     metaRenda,
+        investimento:   disponibilidade,
+        agendamento:    agendamentoResposta,
+        anuncio:        utmContent,
+        sistema_operacional: sistemaOperacional,
+        status:         status,
+        origem:         "Formulário dōTERRA - Negócio",
+        timestamp:      formatarDataHoraBrasilia(),
+      };
+    }
+
+    // ----------------------------------------------------------------
+    // saveLead — lead completo (chegou até o agendamento)
+    // ----------------------------------------------------------------
+    let leadJaSalvo = false;
+
+    function saveLead() {
+      if (leadJaSalvo) return;
+      if (!(nomeUsuario && numeroWhatsapp)) return;
+      leadJaSalvo = true;
+
+      const payload = construirPayloadLead("Completo");
+      console.log("📤 Lead completo:", payload);
+
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead');
+      }
+
+      notificarWhatsapp(payload);
+      enviarLeadParaSheet(payload);
+    }
+
+    // ----------------------------------------------------------------
+    // salvarLeadParcial — preencheu nome + whatsapp mas saiu sem terminar
+    // ----------------------------------------------------------------
+    function salvarLeadParcial() {
+      if (leadJaSalvo) return;
+      if (!(nomeUsuario && numeroWhatsapp)) return;
+      leadJaSalvo = true;
+
+      const payload = construirPayloadLead("Parcial (saiu sem terminar)");
+      console.log("📤 Lead parcial:", payload);
+      enviarLeadParaSheet(payload, true);
+    }
+
+    // ----------------------------------------------------------------
+    // enviarLeadParaSheet — envia o payload de lead pro Apps Script
+    // ----------------------------------------------------------------
+    function enviarLeadParaSheet(payload, viaSaidaDePagina) {
+      if (GOOGLE_SHEET_URL === "SUA_URL_AQUI") return;
+
+      const corpo = JSON.stringify(payload);
+      if (viaSaidaDePagina && navigator.sendBeacon) {
+        navigator.sendBeacon(GOOGLE_SHEET_URL, new Blob([corpo], { type: "text/plain" }));
+      } else {
+        fetch(GOOGLE_SHEET_URL, {
+          method:  "POST",
+          mode:    "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body:    corpo,
+        }).catch(err => console.error("❌ Erro ao salvar lead:", err));
+      }
+    }
+
+    // ----------------------------------------------------------------
+    // notificarWhatsapp — avisa a Lavinia Gabriella via CallMeBot a cada novo lead
+    // ----------------------------------------------------------------
+    function notificarWhatsapp(payload) {
+      if (CALLMEBOT_APIKEY === "SUA_APIKEY_AQUI") return;
+
+      const texto =
+        `Novo lead dōTERRA!\n` +
+        `Nome: ${payload.nome}\n` +
+        `WhatsApp: ${payload.whatsapp}\n` +
+        `Já possui cadastro: ${payload.possui_cadastro}\n` +
+        `Busca: ${payload.busca}\n` +
+        `Anúncio: ${payload.anuncio || "não identificado"}`;
+
+      const url = `https://api.callmebot.com/whatsapp.php?phone=${CALLMEBOT_PHONE}&text=${encodeURIComponent(texto)}&apikey=${CALLMEBOT_APIKEY}`;
+
+      fetch(url, { mode: "no-cors" }).catch(err => console.error("❌ Erro ao notificar WhatsApp:", err));
+    }
+  </script>
+</body>
+</html>
